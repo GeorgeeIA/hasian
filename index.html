@@ -150,16 +150,11 @@
         "foto5.jpg",
         "foto6.png",
         "foto7.jpg",
+        "foto3.png",
+        "foto8.jpg",
       ];
 
-      const videos = [
-        "vidio1.mp4",
-        "vidio2.mp4",
-        "vidio3.mp4",
-        "vidio4.mp4",
-        "vidio5.mp4",
-        "vidio6.mp4",
-      ];
+      const videos = ["vidio1.mp4", "vidio2.mp4", "vidio3.mp4", "vidio4.mp4"];
 
       images.sort(() => Math.random() - 0.5);
       videos.sort(() => Math.random() - 0.5);
@@ -204,7 +199,7 @@
 
       // TIMELAPSE
       document.querySelectorAll(".timelapse").forEach((video) => {
-        video.playbackRate = 2.5;
+        video.playbackRate = 1;
       });
     </script>
   </body>
