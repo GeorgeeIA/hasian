@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Love You Boruku</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap 4 -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(to bottom, #fff0f5, #ffffff);
+        font-family: "Segoe UI", sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* ===== BACKGROUND FLOWER ONLY ===== */
+      .bg-float {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .float-item {
+        position: absolute;
+        animation: fall linear infinite;
+        opacity: 0.8;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-10vh) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* HERO */
+      .hero {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .hero h1 {
+        color: #e91e63;
+        font-size: 3rem;
+        font-weight: bold;
+        animation: fadeIn 3s;
+      }
+
+      /* GALLERY */
+      .gallery-box {
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(233, 30, 99, 0.25);
+      }
+
+      .gallery-box img,
+      .gallery-box video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+
+      .gallery-box:hover img,
+      .gallery-box:hover video {
+        transform: scale(1.05);
+      }
+
+      footer {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #777;
+        font-size: 14px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- BACKGROUND FLOWER -->
+    <div class="bg-float" id="bgFloat"></div>
+
+    <div class="content">
+      <!-- HERO -->
+      <section class="hero">
+        <h1>❤️ Love You Boruku ❤️</h1>
+        <p></p>
+      </section>
+
+      <!-- GALLERY -->
+      <div class="container mb-5">
+        <div class="row" id="gallery"></div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer>💖 George Yang Tidak Kau Anggap 💖</footer>
+    </div>
+
+    <script>
+      /* ===== BACKGROUND FLOWER ONLY ===== */
+      const bg = document.getElementById("bgFloat");
+      const flowers = ["🌸", "🌹", "🌺"];
+
+      for (let i = 0; i < 45; i++) {
+        const item = document.createElement("div");
+        item.className = "float-item";
+        item.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.fontSize = 16 + Math.random() * 24 + "px";
+        item.style.animationDuration = 6 + Math.random() * 8 + "s";
+        item.style.animationDelay = Math.random() * 3 + "s";
+        bg.appendChild(item);
+      }
+
+      /* ===== DATA ===== */
+      const images = [
+        "foto1.png",
+        "foto2.jpg",
+        "foto3.png",
+        "foto5.jpg",
+        "foto6.png",
+        "foto7.jpg",
+      ];
+
+      const videos = [
+        "vidio1.mp4",
+        "vidio2.mp4",
+        "vidio3.mp4",
+        "vidio4.mp4",
+        "vidio5.mp4",
+        "vidio6.mp4",
+      ];
+
+      images.sort(() => Math.random() - 0.5);
+      videos.sort(() => Math.random() - 0.5);
+
+      const gallery = document.getElementById("gallery");
+      let imgIndex = 0;
+
+      videos.forEach((video) => {
+        // FOTO KIRI
+        if (images[imgIndex]) {
+          gallery.innerHTML += `
+            <div class="col-md-4 mb-4">
+              <div class="gallery-box">
+                <img src="${images[imgIndex++]}" alt="Kenangan">
+              </div>
+            </div>
+          `;
+        }
+
+        // VIDEO TENGAH
+        gallery.innerHTML += `
+          <div class="col-md-4 mb-4">
+            <div class="gallery-box">
+              <video autoplay loop muted playsinline class="timelapse">
+                <source src="${video}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        `;
+
+        // FOTO KANAN
+        if (images[imgIndex]) {
+          gallery.innerHTML += `
+            <div class="col-md-4 mb-4">
+              <div class="gallery-box">
+                <img src="${images[imgIndex++]}" alt="Kenangan">
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      // TIMELAPSE
+      document.querySelectorAll(".timelapse").forEach((video) => {
+        video.playbackRate = 2.5;
+      });
+    </script>
+  </body>
+</html>
